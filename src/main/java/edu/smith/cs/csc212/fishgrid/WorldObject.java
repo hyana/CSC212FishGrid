@@ -249,6 +249,7 @@ public abstract class WorldObject {
 			throw new AssertionError("Couldn't find myself! Check World.register still works!");
 		}
 	}
+	
 
 	/**
 	 * Find all the items at the same position as me!

@@ -92,7 +92,6 @@ public class World {
 		System.out.println("remove: "+item.getClass().getSimpleName());
 		items.remove(item);
 	}
-	
 	/**
 	 * How big is the world we model?
 	 * @return the width.
@@ -115,7 +114,7 @@ public class World {
 	public IntPoint pickUnusedSpace() {
 		// Build a set of all available spaces:
 		Set<IntPoint> available = new HashSet<>();
-		for (int x=0; x<getWidth(); x++) {
+		for (int x=0; x < getWidth(); x++) {
 			for (int y=0; y<getHeight(); y++) {
 				available.add(new IntPoint(x, y));
 			}
@@ -210,6 +209,8 @@ public class World {
 				// This if-statement doesn't let anyone step on the Snail.
 				// The Snail(s) are not gonna take it.
 				return false;
+			} if (it instanceof Rock) {
+				return false;
 			}
 		}
 		
@@ -234,10 +235,11 @@ public class World {
 	 */
 	public static void objectsFollow(WorldObject target, List<? extends WorldObject> followers) {
 		// TODO(FishGrid) Comment this method!
-		// What is recentPositions?
-		// What is followers?
-		// What is target?
-		// Why is past = putWhere[i+1]? Why not putWhere[i]?
+		// What is recentPositions? recentPositions is the array of positions that playerFish have had from the very beginning.
+		// What is followers? followers is the list of following fish which follow playerFish after being caught by it.
+		// What is target? target is the fish that was first caught
+		// Why is past = putWhere[i+1]? Why not putWhere[i]? Because objectsFollow should only detect fish that are following playerFish not playerFish itself,
+		// and if you don't do [i+1] then putWhere.get(i+1) will include playerFish's position too
 		List<IntPoint> putWhere = new ArrayList<>(target.recentPositions);
 		for (int i=0; i < followers.size() && i+1 < putWhere.size(); i++) {
 			// What is the deal with the two conditions in this for-loop?
